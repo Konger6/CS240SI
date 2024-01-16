@@ -42,6 +42,8 @@ int main() {
     readStudents(inputFile);
     int graduationYear = calculateGraduationYear(student.age);
     writeGraduationFile(outputFile, student, graduationYear);
+
+    readStudents(outputFile);
   
     fclose(inputFile);
   
