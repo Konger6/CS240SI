@@ -12,7 +12,7 @@ typedef struct {
 
 void readStudents(FILE *fptr) {
     Student student;
-    while (fscanf(fptr, "%d %s %d %f", &student.studentID, student.name, &student.age, &student.gpa) != EOF) {
+    while (fscanf(fptr, "%d,%99[^,],%d,%f", &student.studentID, student.name, &student.age, &student.gpa) != EOF) {
         printf("ID: %d, Name: %s, Age: %d, GPA: %.2f\n", student.studentID, student.name, student.age, student.gpa);
     }
 }
@@ -37,15 +37,19 @@ int main() {
         return 1;
     }
 
-    Student student = new student(2423, Debbie, 19, 2.0);
-  
+    Student student = {2423, "Debbie", 19, 2.0};
+
     readStudents(inputFile);
+
+    outputFile = fopen("graduation.txt", "w");
+    if (outputFile == NULL) {
+      perror("Error opening ouput file");
+      return 1;
+    }
     int graduationYear = calculateGraduationYear(student.age);
     writeGraduationFile(outputFile, student, graduationYear);
 
-    readStudents(outputFile);
-  
     fclose(inputFile);
-  
+
     return 0;
 }
