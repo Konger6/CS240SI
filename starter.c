@@ -3,6 +3,13 @@
 
 #define MAX_NAME_LENGTH 100
 
+/*
+HINTS: ​
+use fscanf to read each line, remember to check for the end of the file​
+For each record, calculate the graduation year as 2024 + (22 – Age)​
+Use fprintf to write each student's ID, name, and calculated graduation year.​
+*/
+
 typedef struct {
     int studentID;
     char name[MAX_NAME_LENGTH];
