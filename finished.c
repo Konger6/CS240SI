@@ -10,6 +10,17 @@ typedef struct {
     float gpa;
 } Student;
 
+   /*
+ TIPS: A couple of common practices in CS 240, is to check the fscanf to make sure that it is equal to the amount of items you are supposed to have.
+    I am arbitrarily doing this by making sure its not equal to -1 or EOF. But it's still a good idea to check if its 4. I also did %99 for the student name, 99 is an the max_name_length -1.
+    You can put max_name_length-1 or 99. Either one works. 
+
+    I encourage you to copy this into a file in your terminal with the students.txt, and play around with it to see what works and what doesnt.
+    Have fun, and feel free to use the discussions tab to ask questions!
+
+    */
+
+
 void readStudents(FILE *fptr) {
     Student student;
     while (fscanf(fptr, "%d,%99[^,],%d,%f", &student.studentID, student.name, &student.age, &student.gpa) != EOF) {
