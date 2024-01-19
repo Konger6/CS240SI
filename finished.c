@@ -18,6 +18,9 @@ typedef struct {
     I encourage you to copy this into a file in your terminal with the students.txt, and play around with it to see what works and what doesnt.
     Have fun, and feel free to use the discussions tab to ask questions!
 
+    This can be done my ssh into your terminal, and then you can adding this file by doing vim finished.c, and vim students.txt to create the other file. You can copy and past this code straight into it.
+    gcc the finished.c code into an executable (look it up), and then fun ./finished.c
+    You can remove it when you are done by doing rm and then the file name.
     */
 
 
