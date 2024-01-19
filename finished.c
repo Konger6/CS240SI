@@ -60,6 +60,7 @@ int main() {
     int graduationYear = calculateGraduationYear(student.age);
     writeGraduationFile(outputFile, student, graduationYear);
 
+    inputFile = NULL;
     fclose(inputFile);
 
     return 0;
