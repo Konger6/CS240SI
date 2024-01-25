@@ -1,15 +1,16 @@
-* solution.c - file to struct */
+/* solution.c - file to struct */
 /* Made by Sophia Konger */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <stddef.h>
 
 #define MAX_FOOD_ITEMS 15
 
 /*
- * Struct definition for food items. This will hold information about 
+ * Struct definition for food items. This will hold information about
  * each food item including calories, fat, carbs, protein, and price.
  */
 typedef struct {
@@ -18,13 +19,13 @@ typedef struct {
     int carbs;
     float protein;
     float price;
-} foodItem;
+} FoodItem;
 
 // Global array to store food items and a counter for the number of items.
 FoodItem g_data_arr[MAX_FOOD_ITEMS];
 int g_num_items = 0;
 
-/* 
+/*
  * Function to read data from a file and store it in the global array g_data_arr.
  * The function takes a filename as an argument and returns 0 on success, -1 on failure.
  */
@@ -35,7 +36,7 @@ int read_data(char *filename) {
         perror("Error opening file");
         return -1;
     }
-  
+
     // Temporary variables to store data read from the file.
     int calories;
     int fat;
@@ -44,17 +45,29 @@ int read_data(char *filename) {
     float price;
     char temp;
 
+     // Read the first line before entering the loop
+    int res = fscanf(fp, "%d|%dg|%dg|%fg|$%f", &calories, &fat, &carbs, &protein, &price);
+
     // Read each line from the file until EOF is reached.
-    while (fscanf(fp, "%d|%dg|%dg|%fg|$%f", &calories, &fat, &carbs, &protein, &price) != EOF) {
-        // Check if the global array is full.
+    while (res != EOF) {
+        // Check if the number of items read is correct
+        if (res != 5) {
+            printf("Invalid file format or incomplete data at line %d.\n", g_num_items + 1);
+            fclose(fp);
+            return -1;
+        }
+
         if (g_num_items >= MAX_FOOD_ITEMS) {
             printf("Maximum number of items reached.\n");
             break;
         }
 
-        // Store the data read into a temporary struct and then add it to the global array.
-        foodItem item = {calories, fat, carbs, protein, price};
+        // Store the data in the array
+        FoodItem item = {calories, fat, carbs, protein, price};
         g_data_arr[g_num_items++] = item;
+
+        // Read the next line for the next iteration
+        res = fscanf(fp, "%d|%dg|%dg|%fg|$%f", &calories, &fat, &carbs, &protein, &price);
     }
 
     // Close the file and return 0 to indicate success.
@@ -63,7 +76,7 @@ int read_data(char *filename) {
 }
 
 
-/* 
+/*
  * Function to sort the food items in the global array by price in ascending order.
  */
 void filter_by_cost() {
@@ -72,7 +85,7 @@ void filter_by_cost() {
         for (int j = 0; j < g_num_items - i - 1; j++) {
           // Swap items if they are in the wrong order.
             if (g_data_arr[j].price > g_data_arr[j + 1].price) {
-                foodItem temp = g_data_arr[j];
+                FoodItem temp = g_data_arr[j];
                 g_data_arr[j] = g_data_arr[j + 1];
                 g_data_arr[j + 1] = temp;
             }
@@ -81,7 +94,7 @@ void filter_by_cost() {
 }
 
 
-/* 
+/*
  * Function to write the sorted data to a new file.
  * The function takes a filename as an argument and returns 0 on success, -1 on failure.
  */
@@ -93,7 +106,7 @@ int write_data(char *filename) {
         return -1;
     }
 
-    
+
     // Write each item from the global array to the file in the specified format.
     for (int i = 0; i < g_num_items; i++) {
         fprintf(fp, "%d|%dg|%dg|%0.1fg|$%0.2f\n",
@@ -107,7 +120,7 @@ int write_data(char *filename) {
 }
 
 
-/* 
+/*
  * Main function of the program.
  * It takes command line arguments, reads the data, sorts it, and writes it back to a file.
  */
