@@ -54,7 +54,18 @@ int main() {
 
     // Discussion Questions:
     // Q1. How is the 'struct point' array laid out in memory?
+        /* the first int x will lay in the first 4 bytes of memory, and second int y will lay in next 4 bytes of memory */
     // Q2. How does strcpy work and how is the 'name' string stored in memory?
+        /* strcoy function copies the string pointed to by src, including the terminating null byte ('\0'), 
+        to the buffer pointed to by dest.
+        The name field is a character array (char array) of fixed size 50. 
+        This means it allocates 50 contiguous bytes in memory, regardless of the actual length of the string it holds.
+        When the strcpy function is used to copy "Alice" into student.name, 
+        it lays out the characters of "Alice" sequentially in the first few bytes of this array.
+        */
+    // Q3. How would i run and compile this file into an executable in the terminal with 
+    // all warnings enabled, warnings turned to errors, and std of 99?
+        /* gcc -Wall -Werror -std=c99 -o my_array my_array.c */
 
     return 0;
 }
