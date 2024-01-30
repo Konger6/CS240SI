@@ -41,6 +41,8 @@ Understand and implement structures, arrays, and string operations in C.
 11. Discussion Questions
     - How is the struct point array laid out in memory?
     - How does strcpy work, and how is the name string stored in memory?
+    - How would i run and compile this file into an executable in the terminal with 
+          all warnings enabled, warnings turned to errors, and std of 99?
 
 12. Compile and Run
     - Compile my_array.c and run the program.
