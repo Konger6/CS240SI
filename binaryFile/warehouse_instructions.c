@@ -32,19 +32,12 @@ typedef struct {
     float price; 
 } item_t; 
 
-
-
 //enum for error codes 
 typedef enum { 
-
     SUCCESS = 0,        // No error, operation successful 
-
     ERROR_DUPLICATE_ID, // Duplicate item ID error 
-
     ERROR_CAPACITY,     // Warehouse capacity exceeded error 
-
     ERROR_FILE         // File-related error (optional, for future use) 
-
 } WarehouseErrorCode; 
 
 /*
